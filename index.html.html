@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Especial</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://media.tenor.com/h3HWyGNQ3PYAAAAM/cute-kawaii.gif');
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+        .button {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #f50057;
+        }
+        .heart {
+            font-size: 2em;
+            color: red;
+        }
+        #noButton {
+            position: relative;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Hola, Tu!</h1>
+        <p>Estaba pensando en lo increíble que sería pasar un rato contigo. ¿Te gustaría salir conmigo?</p>
+        <p><span class="heart">❤️</span> Yo me encargaré de que sea un momento inolvidable. <span class="heart">❤️</span></p>
+        <button id="siButton" class="button" onclick="acceptInvitation()">Claro que sí😍</button>
+        <button id="noButton" class="button" onclick="declineInvitation()">No🥺</button>
+
+        <div id="messageContainer" class="hidden">
+            <h2>¡Yay! ¡Es un sí! 🎉</h2>
+            <p>Estoy tan feliz que aceptaste. ya veras que no te arrepentiras </p>
+            <button class="button" onclick="showFinalMessage()">Nos vemos pronto 💕</button>
+        </div>
+    </div>
+
+    <script>
+        let attempts = 0;  // Contador de intentos
+
+        // Función para aceptar la invitación
+        function acceptInvitation() {
+            // Cambiar fondo a algo bonito y mostrar mensaje especial
+            document.body.style.backgroundImage = "url('https://i.pinimg.com/originals/c2/e4/e1/c2e4e1a0533e851b589ab1e71905f807.gif')";
+            document.body.style.backgroundColor = "#ffcccc";  // Fondo color bonito
+            document.getElementById('messageContainer').classList.remove('hidden');
+            document.getElementById('siButton').classList.add('hidden');  // Ocultar botón "Sí"
+            document.getElementById('noButton').classList.add('hidden');  // Ocultar botón "No"
+        }
+
+        // Función para rechazar la invitación
+        function declineInvitation() {
+            attempts++;
+            const noButton = document.getElementById('noButton');
+
+            // Si la persona hace clic en "No" varias veces, cambiar fondo a algo más triste
+            if (attempts < 5) {
+                const randomX = Math.random() * 200 - 100; // Movimiento aleatorio en X
+                const randomY = Math.random() * 100 - 50;  // Movimiento aleatorio en Y
+                noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                noButton.innerText = "Vamos Díme que sí piensalo bien🙏🏽";
+            } else {
+                // Cambiar fondo a algo gris o triste si siguen rechazando
+                document.body.style.backgroundImage = "url('https://i.pinimg.com/originals/44/00/e8/4400e8ab2a6096fdc14e2749c74e91f4.gif')";
+                document.body.style.backgroundColor = "#2f2f2f";  // Fondo gris triste
+                noButton.innerText = "¡Tienes razón siii😍!";
+                noButton.setAttribute("onclick", "acceptInvitation()");
+                noButton.style.transform = 'none';  // Volver al lugar original
+            }
+        }
+
+        // Función para mostrar mensaje final después de aceptar
+        function showFinalMessage() {
+            alert("¡Nos vemos pronto! 😍 Estoy seguro que será un momento increíble.");
+        }
+    </script>
+</body>
+</html>
